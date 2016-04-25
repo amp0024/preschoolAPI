@@ -1,5 +1,9 @@
 preschoolAPI
 ======
+<dl>
+  <dt>Backend API</dt>
+  <dd>API for frontend group project edU. "Educate develop understand.</dd>
+</dl>
 
 Tables
 ------
