@@ -19,10 +19,8 @@ Tables
 | activites | are neat      | 
 
 
-Routes
-------
 
-Views
+Views / Routes
 ------
 Detail of views to tie backend routes to.
 
@@ -30,50 +28,51 @@ Login
 ---
 check user and role to allow login.  Also allow for registeration.
 
-| functionality        | url           | 
+| functionality        | Done?          | 
 | ------------- |:-------------:|
-| auth/login     | Needs all | 
-| auth/register     | centered      | 
+| auth/login     |  | 
+| auth/register     |       | 
 
 
 Admin
 ---
 Needs everything
 
-| functionality        | url           | 
+| functionality        | Done?          | 
 | ------------- |:-------------:|
-| add teacher     | Needs all | 
-| add class      | centered      | 
-| add student | are neat      | 
-| add parent | assign to student      |
+| add teacher     |  | 
+| add class      |       | 
+| add student |       | 
+| add parent |       |
 
 
 classes
 ---
 needs data from students, teachers, and activities tables
-| functionality        | url           | 
+
+| functionality        | Done?           | 
 | ------------- |:-------------:|
-| auth/login     | Needs all | 
-| auth/register     | centered      | 
+| auth/login     |  | 
+| auth/register     |   | 
 
 
 guardians
 ---
 needs data from students and activities tables
 
-| functionality        | url           | 
+| functionality        | Done?           | 
 | ------------- |:-------------:|
-| view student info     | Needs all | 
-| view student activities      | centered      | 
+| view student info     |  | 
+| view student activities      |       | 
 
 teacher
 ---
 needs data from students, classes, and activities tables
 
-| functionality        | url           | 
+| functionality        | Done?          | 
 | ------------- |:-------------:|
-| add student info     | Needs all | 
-| add student activities      | centered      | 
+| add student info     |  | 
+| add student activities      |    | 
 
 
 
