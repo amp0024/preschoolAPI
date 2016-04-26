@@ -1,118 +1,81 @@
-// var express = require('express');
-// var router = express.Router();
+var express = require('express');
+var router = express.Router();
 
-// var knex = require('../db/knex');
-// var bcrypt = require('bcrypt');
-// var jwt    = require('jsonwebtoken');
+var knex = require('../db/knex');
+var passport = require('../lib/auth');
+var helpers = require('../lib/helpers');
 
 
-// function ensureAuthenticated(req, res, next) {
-//   // check if user is authenticated
-//   if(req.user) {
-//     // if so -> call next()
-//     return next();
-//   } else {
-//     // if not -> redirect to login
-//     return res.redirect('/login');
-//   }
-// }
-// function loginRedirect(req, res, next) {
-//   // check if user is authenticated
-//   if(req.user) {
-//     // if so -> redirect to main route
-//     return res.redirect('/');
-//   } else {
-//     // if not -> call next()
-//     return next();
-//   }
-// }
-// function hashing (password) {
-//   var salt = bcrypt.genSaltSync(10);
-//   return bcrypt.hashSync(password, salt);
-// }
-// function comparePassword(password, hashedpassword) {
-//     return bcrypt.compareSync(password, hashedpassword);
-// }
-// // Create username and Password Account
-// router.post('/register', function(req, res, next) {
-//   var username = req.body.username;
-//   var password = req.body.password;
-//   // check if username is unique
-//   knex('users').where('username', username)
-//     .then(function(data){
-//       // if username is in the database send an error
-//       if(data.length) {
-//           return res.redirect('/register');
-//       } else {
-//         // hash and salt the password
-//         var hashedPassword = hashing(password);
-//         // if username is not in the database insert it
-//         knex('users').insert({
-//           username: username,
-//           password: hashedPassword
-//         })
-//         .then(function(data) {
-//           res.json({
-//             message: "You've registered",
-//             status: "Success"
-//           });
-//         })
-//         .catch(function(err) {
-//           return res.send("wrong!");
-//         });
-//       }
-//     })
-//     .catch(function(err){
-//       return next(err);
-//     });
-// });
-// // Login with username and password
-// router.post('/login', function(req, res, next) {
-//   var username = req.body.username;
-//   var password = req.body.password;
-//   knex('users').where('username', username)
-//       .then(function(data) {
-//         // username does not exist. return error.
-//         if (!data.length) {
-//           return done('Incorrect username.');
-//         }
-//         var user = data[0];
-//         // username found but do the passwords match?
-//         if (comparePassword(password, user.password)) {
-//           // passwords match! return user
-//           var token = jwt.sign(user, 'superSecret', {
-//             expiresIn: 6000
-//           });
-//           if (user.is_admin === true){
-//             res.json({
-//               success: true,
-//               user: user.id,
-//               admin: user.is_admin,
-//               mfc_id: user.site_id,
-//               token: token
-//             })
-//           } else {
-//             cart.createCart(user.id).then(function(cartData){
-//               res.json({
-//                 success: true,
-//                 cart: cartData,
-//                 user: user.id,
-//                 admin: user.is_admin,
-//                 site_id: user.site_id,
-//                 token: token
-//               });
-//             });
-//           }
-//           // return done(null, user);
-//         } else {
-//           // passwords don't match! return error
-//           return res.json('Incorrect password.');
-//         }
-//       })
-//       .catch(function(err) {
-//         // issue with SQL/nex query
-//         return res.json('Incorrect username and/or password.');
-//       });
-// });
+router.get('/', helpers.ensureAuthenticated, function(req, res, next) {
+  res.render('index', {user: req.user});
+});
 
-// module.exports = router;
+router.get('/login', helpers.loginRedirect, function(req, res, next) {
+  res.render('login', {message: req.flash('message')});
+});
+
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user) {
+    if (err) {
+      return next(err);
+    } else {
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        } else {
+          return res.redirect('/');
+        }
+      });
+    }
+  })(req, res, next);
+});
+
+router.get('/register', helpers.loginRedirect, function(req, res, next) {
+  res.render('register', {message: req.flash('message')});
+});
+
+router.post('/register', function(req, res, next) {
+  var email = req.body.email;
+  var password = req.body.password;
+  // check if email is unique
+  knex('users').where('email', email)
+    .then(function(data){
+      // if email is in the database send an error
+      if(data.length) {
+          req.flash('message', {
+            status: 'danger',
+            message: 'Email already exists.!'
+          });
+          return res.redirect('/register');
+      } else {
+        // hash and salt the password
+        var hashedPassword = helpers.hashing(password);
+        // if email is not in the database insert it
+        knex('users').insert({
+          email: email,
+          password: hashedPassword
+        })
+        .then(function(data) {
+          req.flash('message', {
+            status: 'success',
+            message: 'Welcome!'
+          });
+          return res.redirect('/login');
+        })
+        .catch(function(err) {
+          return res.send('crap');
+        });
+      }
+    })
+    .catch(function(err){
+      return next(err);
+    });
+});
+
+router.get('/logout', helpers.ensureAuthenticated, function(req, res, next) {
+  req.logout();
+  res.redirect('/');
+});
+
+
+module.exports = router;
