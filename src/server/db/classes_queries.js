@@ -1,29 +1,36 @@
-var knex = require('./knex');
+var knex = require('./knex.js');
 
 function Classes() {
   return knex('classes');
 }
 
-module.exports = {
-  getClasses: function(){
-    return Classes().select().join('teachers', 'teacherid', 'teachers.id');
-  },
-  getClass: function(id){
-    return Classes().where('id', id);
-  },
-  getClassesbyTeacher: function(mfc_id){
-    return Products().select()
-            .join('teachers', 'teacherid', 'teachers.id')
-            .where({'teacherid': teacherid});
-  },
-  createClass: function(class){
-    return Products().insert(class, 'id');
-  },
-  updateClass: function(class, id){
-    return Classes().where('id', id).update(class);
-  },
-  deleteClass: function(id){
-    console.log('id');
-    return Classes().where('id', id).delete();
-  }
+// *** queries *** //
+
+function getAll() {
+  return Classes().select();
 }
+
+function getSingle(id) {
+  return Classes().where('id', id).first();
+}
+
+function add(classes) {
+  return Classes().insert(classes, 'id');
+}
+
+function update(id, updates) {
+  return Classes().where('id', id).update(updates);
+}
+
+function deleteItem(id) {
+  return Classes().where('id', id).del();
+}
+
+
+module.exports = {
+  getAll: getAll,
+  getSingle: getSingle,
+  add: add,
+  update: update,
+  deleteItem: deleteItem
+};
