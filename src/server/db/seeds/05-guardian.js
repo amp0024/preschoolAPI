@@ -9,6 +9,7 @@ exports.seed = function(knex, Promise) {
 
       firstName: 'Johan', 
       lastName: 'Bach',
+      lvlofaccess: 1,
       phone: '303-555-5555',
       email: 'jbach@test.com',
       username: 'jbach',
@@ -19,6 +20,7 @@ exports.seed = function(knex, Promise) {
 
       firstName: 'Ludwig', 
       lastName: 'Van Beethoven',
+      lvlofaccess: 1,
       phone: '212-444-4444',
       email: 'lbeethoven@test.com',
       username: 'lbeets',
@@ -29,6 +31,7 @@ exports.seed = function(knex, Promise) {
 
       firstName: 'Wolfgang', 
       lastName: 'Mozart',
+      lvlofaccess: 1,
       phone: '415-333-3333',
       email: 'wm@test.com',
       username: 'Mozzy',

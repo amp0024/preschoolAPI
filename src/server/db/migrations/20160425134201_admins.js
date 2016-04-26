@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary();
     table.string('username').unique();
     table.string('password');
+    table.integer('lvlofaccess');
     
     table.string('firstName');
     

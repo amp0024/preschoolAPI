@@ -10,6 +10,7 @@ exports.seed = function(knex, Promise) {
       password: 'asbestos',
       firstName: 'Shirley',
       lastName: 'McMahon',
+      lvlofaccess: 3,
       email: 'Shirley.mcmahon@test.com'
     }),
 
@@ -18,6 +19,7 @@ exports.seed = function(knex, Promise) {
       password: 'sicario',
       firstName: 'Javier',
       lastName: 'Bardem',
+      lvlofaccess: 3,
       email: 'j.bardem@test.com'
     }),
   knex('admins').insert({
@@ -25,6 +27,7 @@ exports.seed = function(knex, Promise) {
       password: 'datblubba',
       firstName: 'Eustace',
       lastName: 'McFattits',
+      alvlofaccess: 3,
       email: 'Mcfattits@test.com'
     })
   );

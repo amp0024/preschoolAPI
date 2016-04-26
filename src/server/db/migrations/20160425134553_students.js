@@ -6,6 +6,8 @@ exports.up = function(knex, Promise) {
     table.string('firstName');
     
     table.string('lastName');
+    table.integer('lvlofaccess');
+
     
     table.string('email');
     table.string('image');

@@ -8,6 +8,7 @@ exports.seed = function(knex, Promise) {
     knex('teachers').insert({
       username: 'gwen', 
       password: 'farts',
+      lvlofaccess: 2,
       firstName: 'Gwen',
       lastName: 'Staci',
       email: 'gstaci@test.com',
@@ -15,12 +16,12 @@ exports.seed = function(knex, Promise) {
       schoolid: 1
 
 
-
     }),
     
     knex('teachers').insert({
       username: 'pparker', 
       password: 'spidey',
+      lvlofaccess: 2,
       firstName: 'Peter',
       lastName: 'Parker',
       email: 'pparker@test.com',
@@ -34,6 +35,7 @@ exports.seed = function(knex, Promise) {
     knex('teachers').insert({
       username: 'hdent', 
       password: 'twoface',
+      lvlofaccess: 2,
       firstName: 'Harvey',
       lastName: 'Dent',
       email: 'hdent@test.com',

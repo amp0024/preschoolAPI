@@ -9,6 +9,7 @@ exports.seed = function(knex, Promise) {
 
       firstName: 'Robby', 
       lastName: 'Gaines',
+      lvlofaccess: 0,
       email: 'rgaines@test.com',
       image: 'asdf',
       classid: 1,
@@ -20,6 +21,7 @@ exports.seed = function(knex, Promise) {
 
       firstName: 'Tyler', 
       lastName: 'Rozboril',
+      lvlofaccess: 0,
       email: 'trozboril@test.com',
       image: 'asdf',
       classid: 2,
@@ -31,6 +33,7 @@ exports.seed = function(knex, Promise) {
 
       firstName: 'Adam', 
       lastName: 'Poulson',
+      lvlofaccess: 1,
       email: 'apoulson@test.com',
       image: 'asdf',
       classid: 3,
