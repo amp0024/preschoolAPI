@@ -3,9 +3,10 @@ var router = express.Router();
 
 var queries = require('../db/admin_queries');
 
+// only availible to school admins
 
 // GET all todos
-router.get('/', function(req, res, next) {
+router.get('/', helpers.ensureAuthenticated, function(req, res, next) {
   queries.getAll()
   .then(function(todos) {
     console.log(todos)

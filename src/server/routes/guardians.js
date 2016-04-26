@@ -3,6 +3,8 @@ var router = express.Router();
 
 var queries = require('../db/guardians_queries');
 
+// authorized users 
+// no schoolAdmin rights
 
 // GET all todos
 router.get('/', function(req, res, next) {
