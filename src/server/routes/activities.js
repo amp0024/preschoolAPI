@@ -5,7 +5,7 @@ var queries = require('../db/activities_queries');
 
 
 // GET all todos
-router.get('/', function(req, res, next) {
+router.get('/', authHelpers.ensureAdmin, function(req, res, next) {
   queries.getAll()
   .then(function(todos) {
     console.log(todos)
