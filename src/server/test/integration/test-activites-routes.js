@@ -4,7 +4,7 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var should = chai.should();
 
-var server = require('../../../app');
+var server = require('../../app');
 var testUtilities = require('../utilities');
 var seed = require('../../db/seeds/test');
 var Member = require('../../db/models/member');
@@ -12,24 +12,16 @@ var Member = require('../../db/models/member');
 chai.use(chaiHttp);
 
 
-describe('conversations routes', function() {
+describe('activities routes', function() {
 
-  // beforeEach(function(done) {
-  //   testUtilities.dropDatabase();
-  //   seed.test(done);
-  // });
 
-  // afterEach(function(done) {
-  //   testUtilities.dropDatabase(done);
-  // });
-
-  describe('GET /gdating/members/:id/conversations', function() {
-    it('should return a members\' conversations', function(done) {
+  describe('GET /activities', function() {
+    it('should return a students\' activities', function(done) {
       Member.findOne()
       .then(function(member) {
-        var memberID = member._id;
+        var activityID = activity.id;
         chai.request(server)
-        .get('/gdating/members/'+ memberID + '/conversations')
+        .get('/activities')
         .end(function(err, res) {
           res.status.should.equal(200);
           res.type.should.equal('application/json');

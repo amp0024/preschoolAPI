@@ -14,14 +14,14 @@ chai.use(chaiHttp);
 
 describe('members routes', function() {
 
-  beforeEach(function(done) {
-    testUtilities.dropDatabase();
-    seed.test(done);
-  });
+  // beforeEach(function(done) {
+  //   testUtilities.dropDatabase();
+  //   seed.test(done);
+  // });
 
-  afterEach(function(done) {
-    testUtilities.dropDatabase(done);
-  });
+  // afterEach(function(done) {
+  //   testUtilities.dropDatabase(done);
+  // });
 
   describe('GET /gdating/members/ping', function() {
     it('should return a response', function(done) {

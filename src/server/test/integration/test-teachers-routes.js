@@ -14,14 +14,14 @@ chai.use(chaiHttp);
 
 describe('conversations routes', function() {
 
-  // beforeEach(function(done) {
-  //   testUtilities.dropDatabase();
-  //   seed.test(done);
-  // });
+  beforeEach(function(done) {
+    testUtilities.dropDatabase();
+    seed.test(done);
+  });
 
-  // afterEach(function(done) {
-  //   testUtilities.dropDatabase(done);
-  // });
+  afterEach(function(done) {
+    testUtilities.dropDatabase(done);
+  });
 
   describe('GET /gdating/members/:id/conversations', function() {
     it('should return a members\' conversations', function(done) {
