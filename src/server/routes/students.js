@@ -4,6 +4,8 @@ var router = express.Router();
 var queries = require('../db/students_queries');
 
 
+// only availible for teachers
+
 // GET all todos
 router.get('/', function(req, res, next) {
   queries.getAll()
