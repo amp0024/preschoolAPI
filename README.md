@@ -6,6 +6,10 @@ preschoolAPI
   <dd>https://github.com/trozboril/preSchoolReadinessApp</dd>
 </dl>
 
+1. createdb preschoolDB
+2. knex migrate:latest --env development
+3. knex seed:run
+
 Tables
 ------
 | Tables        | url           | 
