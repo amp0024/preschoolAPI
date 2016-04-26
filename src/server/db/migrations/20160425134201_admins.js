@@ -10,6 +10,12 @@ exports.up = function(knex, Promise) {
     table.string('lastName');
     
     table.string('email');
+    table.string('image');
+     table.integer('schoolid').unsigned();
+    table.foreign('schoolid')
+      .references('id')
+      .inTable('schools');
+    table.boolean('schooladmin').notNullable();
   });
 };
 exports.down = function(knex, Promise) {

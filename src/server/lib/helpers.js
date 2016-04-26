@@ -1,35 +1,40 @@
 var bcrypt = require('bcrypt');
 
 function ensureAuthenticated(req, res, next) {
-  // check if user is authenticated
   if(req.user) {
-    // if so -> call next()
     return next();
   } else {
-    // if not -> redirect to login
-    return res.redirect('/login');
+    req.flash('messages', {
+      status: 'danger',
+      value: 'Please login.'
+    });
+    return res.redirect('/auth/login');
   }
+}
+// school admin true -> school admin  false -> teacher rights
+function ensureSchoolAdmin(req, res, next) {
+  if (req.user) {
+    if(req.user.schooladmin) {
+      return next();
+    }
+  }
+  req.flash('messages', {
+    status: 'danger',
+    value: 'You do not have permission to view that page.'
+  });
+  return res.redirect('/');
 }
 
 function loginRedirect(req, res, next) {
-  // check if user is authenticated
   if(req.user) {
-    // if so -> redirect to main route
     return res.redirect('/');
   } else {
-    // if not -> call next()
     return next();
   }
 }
 
 function hashing(password) {
   return bcrypt.hashSync(password, 10);
-  // Add promises!!!
-  // var newPassword;
-  // bcrypt.hash(password, 10, function(err, hash) {
-  //   newPassword = hash;
-  // });
-  // return newPassword;
 }
 
 function comparePassword(password, hashedPassword) {
@@ -39,6 +44,7 @@ function comparePassword(password, hashedPassword) {
 
 module.exports = {
   ensureAuthenticated: ensureAuthenticated,
+  ensureAdmin: ensureAdmin,
   loginRedirect: loginRedirect,
   hashing: hashing,
   comparePassword: comparePassword
