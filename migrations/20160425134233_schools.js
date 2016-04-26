@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('schools', function(table){
     
-    table.increments().primary();
+    table.increments('id').primary();
     table.string('name').unique();
     table.string('street');
     

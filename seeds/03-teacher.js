@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
     // Inserts seed entries
     knex('teachers').insert({
       username: 'gwen', 
-      password: 'farts',,
+      password: 'farts',
       firstName: 'Gwen',
       lastName: 'Staci',
       email: 'gstaci@test.com',
@@ -17,9 +17,10 @@ exports.seed = function(knex, Promise) {
 
 
     }),
+    
     knex('teachers').insert({
       username: 'pparker', 
-      password: 'spidey',,
+      password: 'spidey',
       firstName: 'Peter',
       lastName: 'Parker',
       email: 'pparker@test.com',
@@ -29,9 +30,10 @@ exports.seed = function(knex, Promise) {
 
 
     }),
+    
     knex('teachers').insert({
       username: 'hdent', 
-      password: 'twoface',,
+      password: 'twoface',
       firstName: 'Harvey',
       lastName: 'Dent',
       email: 'hdent@test.com',
@@ -44,19 +46,3 @@ exports.seed = function(knex, Promise) {
   );
 };
 
-
-
-table.increments().primary();
-    table.string('username').unique();
-    table.string('password');
-    
-    table.string('firstName');
-    
-    table.string('lastName');
-    
-    table.string('email');
-    table.string('image');
-    table.integer('schoolid').unsigned();
-    table.foreign('schoolid')
-      .references('id')
-      .inTable('schools');
