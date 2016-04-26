@@ -1,13 +1,28 @@
+
+
 module.exports = {
 
   development: {
-    client: 'pg',
-    connection: 'postgres://localhost/preschoolDB'
+    client: 'postgresql',
+    connection: {
+      database: 'preschoolDB'
+    },
+    migrations: {
+      directory: __dirname + '/src/server/db/migrations'
+    },
+    seeds: {
+      directory: __dirname + '/src/server/db/seeds/dev'
+    }
   },
 
   production: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL
+    client: 'postgresql',
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: __dirname + '/src/server/db/migrations'
+    },
+    seeds: {
+      directory: __dirname + '/src/server/db/seeds/production'
+    }
   }
-
 };
