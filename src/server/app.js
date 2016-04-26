@@ -7,8 +7,14 @@ var bodyParser = require('body-parser');
 
 
 // *** routes *** //
-var routes = require('./routes/index.js');
-
+// var routes = require('./routes/index.js');
+var admins = require('./routes/admins.js');
+var teachers = require('./routes/teachers.js');
+var schools = require('./routes/schools.js');
+var classes = require('./routes/classes.js');
+var guardians = require('./routes/guardians.js');
+var students = require('./routes/students.js');
+var activities = require('./routes/activities.js');
 
 // *** express instance *** //
 var app = express();
@@ -32,7 +38,14 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 
 // *** main routes *** //
-app.use('/', routes);
+// app.use('/', routes);
+app.use('/admins', admins);
+app.use('/teachers', teachers);
+app.use('/schools', schools);
+app.use('/classes', classes);
+app.use('/guardians', guardians);
+app.use('/students', students);
+app.use('/activities', activities);
 
 
 // catch 404 and forward to error handler

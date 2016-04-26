@@ -1,29 +1,29 @@
 var knex = require('./knex.js');
 
-function Todos() {
-  return knex('todos');
+function Admins() {
+  return knex('admins');
 }
 
 // *** queries *** //
 
 function getAll() {
-  return Todos().select();
+  return Admins().select();
 }
 
-function getSingle(todoID) {
-  return Todos().where('id', parseInt(todoID)).first();
+function getSingle(id) {
+  return Admins().where('id', id).first();
 }
 
-function add(todo) {
-  return Todos().insert(todo, 'id');
+function add(admins) {
+  return Admins().insert(admins, 'id');
 }
 
-function update(todoID, updates) {
-  return Todos().where('id', parseInt(todoID)).update(updates);
+function update(id, updates) {
+  return Admins().where('id', id).update(updates);
 }
 
-function deleteItem(todoID) {
-  return Todos().where('id', parseInt(todoID)).del();
+function deleteItem(id) {
+  return Admins().where('id', id).del();
 }
 
 

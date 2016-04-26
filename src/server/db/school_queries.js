@@ -1,29 +1,29 @@
 var knex = require('./knex.js');
 
-function Students() {
-  return knex('students');
+function Schools() {
+  return knex('schools');
 }
 
 // *** queries *** //
 
 function getAll() {
-  return Students().select();
+  return Schools().select();
 }
 
 function getSingle(id) {
-  return Students().where('id', id).first();
+  return Schools().where('id', id).first();
 }
 
-function add(student) {
-  return Students().insert(student, 'id');
+function add(schools) {
+  return Schools().insert(schools, 'id');
 }
 
 function update(id, updates) {
-  return Students().where('id', id).update(updates);
+  return Schools().where('id', id).update(updates);
 }
 
 function deleteItem(id) {
-  return Students().where('id', id).del();
+  return Schools().where('id', id).del();
 }
 
 

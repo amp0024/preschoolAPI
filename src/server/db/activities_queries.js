@@ -1,29 +1,36 @@
-var knex = require('./knex');
+var knex = require('./knex.js');
 
 function Activities() {
   return knex('activities');
 }
 
-module.exports = {
-  getActivities: function(){
-    return Activities().select().join('students', 'studentid', 'students.id');
-  },
-  getActivity: function(id){
-    return Activities().where('id', id);
-  },
-  getActivitybyStudent: function(mfc_id){
-    return Activities().select()
-            .join('students', 'studentid', 'students.id')
-            .where({'studentid': studentid});
-  },
-  createActivity: function(activity){
-    return Activities().insert(activity, 'id');
-  },
-  updateActivity: function(activity, id){
-    return Activities().where('id', id).update(activity);
-  },
-  deleteActivity: function(id){
-    console.log('id');
-    return Activities().where('id', id).delete();
-  }
+// *** queries *** //
+
+function getAll() {
+  return Activities().select();
 }
+
+function getSingle(id) {
+  return Activities().where('id', id).first();
+}
+
+function add(activity) {
+  return Activities().insert(activity, 'id');
+}
+
+function update(id, updates) {
+  return Activities().where('id', id).update(updates);
+}
+
+function deleteItem(id) {
+  return Activities().where('id', id).del();
+}
+
+
+module.exports = {
+  getAll: getAll,
+  getSingle: getSingle,
+  add: add,
+  update: update,
+  deleteItem: deleteItem
+};
