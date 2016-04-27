@@ -1,29 +1,29 @@
 var knex = require('./knex.js');
 
-function Admins() {
-  return knex('admins');
+function Users() {
+  return knex('users');
 }
 
 // *** queries *** //
 
 function getAll() {
-  return Admins().select();
+  return Users().select();
 }
 
 function getSingle(id) {
-  return Admins().where('id', id).first();
+  return Users().where('id', id).first();
 }
 
-function add(admins) {
-  return Admins().insert(admins, 'id');
+function add(user) {
+  return Users().insert(user, 'id');
 }
 
 function update(id, updates) {
-  return Admins().where('id', id).update(updates);
+  return Users().where('id', id).update(updates);
 }
 
 function deleteItem(id) {
-  return Admins().where('id', id).del();
+  return Users().where('id', id).del();
 }
 
 

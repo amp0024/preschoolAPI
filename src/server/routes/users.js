@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var queries = require('../db/admin_queries');
+var queries = require('../db/user_queries');
 
 // only availible to school admins
 
