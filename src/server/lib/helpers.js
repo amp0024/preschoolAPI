@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var moment = require('moment');
 var jwt = require('jwt-simple');
 
