@@ -11,7 +11,7 @@ router.post('/login', function(req, res, next) {
   var password = req.body.password;
   var role = req.body.role;
 
-  knex('users').where('email', req.body.email)
+  knex('users').where('email', email)
   .then(function (user) {
     if (!user) {
       return res.status(401).json({
@@ -46,7 +46,8 @@ router.post('/login', function(req, res, next) {
   });
 });
 
-router.post('/register', helepers.ensureAdmin, function(req, res, next) {
+router.post('/register', helpers.ensureAdmin, function(req, res, next) {
+  
   var email = req.body.email;
   var password = req.body.password;
   var role = req.body.role;
@@ -55,6 +56,7 @@ router.post('/register', helepers.ensureAdmin, function(req, res, next) {
   var lastName = req.body.lastName;
   var schoolid = req.body.schoolID;
   var image = req.body.image;
+  
   knex('users').where('email', email)
     .then(function(data) {
       if(data.length) {

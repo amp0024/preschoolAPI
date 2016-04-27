@@ -16,7 +16,8 @@ var classes = require('./routes/classes.js');
 var userRoutes = require('./routes/users.js');
 var students = require('./routes/students.js');
 var activities = require('./routes/activities.js');
-// var authRoutes = require('./routes/auth_routes.js');
+
+var auth = require('./routes/auth.js');
 
 
 // *** express instance *** //
@@ -45,9 +46,10 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 app.use('/schools', schools);
 app.use('/classes', classes);
-app.use('/auth', userRoutes);
+app.use('/users', userRoutes);
 app.use('/students', students);
 app.use('/activities', activities);
+app.use('/auth', auth);
 // app.use('/auth', authRoutes);
 
 
