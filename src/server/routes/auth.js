@@ -11,7 +11,7 @@ router.post('/login', function(req, res, next) {
   var password = req.body.password;
   var role = req.body.role;
 
-  User.findOne({email: req.body.email})
+  knex('users').where('email', req.body.email)
   .then(function (user) {
     if (!user) {
       return res.status(401).json({
@@ -19,7 +19,7 @@ router.post('/login', function(req, res, next) {
         message: 'Email does not exist'
       });
     } else
-      user.comparePassword(req.body.password, function (err, match) {
+      helpers.comparePassword(req.body.password, function (err, match) {
         if (err) {
           return next(err);
         }
