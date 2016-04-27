@@ -13,8 +13,7 @@ exports.seed = function(knex, Promise) {
       city: 'Greenwood Village',
       state: 'CO',
       zip: '80111',
-      info: 'A small school dedicated to building and developing young minds',
-      adminid: 1
+      info: 'A small school dedicated to building and developing young minds'
 
     }),
     knex('schools').insert({
@@ -25,8 +24,7 @@ exports.seed = function(knex, Promise) {
       city: 'Cherry Hills',
       state: 'CO',
       zip: '80113',
-      info: 'The premier place for your kids!',
-      adminid: 2
+      info: 'The premier place for your kids!'
 
     }),
     knex('schools').insert({
@@ -37,8 +35,7 @@ exports.seed = function(knex, Promise) {
       city: 'New York',
       state: 'New York',
       zip: '11111',
-      info: 'A center for kids who want to learn to read and do other stuff good too',
-      adminid: 3
+      info: 'A center for kids who want to learn to read and do other stuff good too'
 
     })
    

@@ -1,4 +1,3 @@
-
 exports.seed = function(knex, Promise) {
   return Promise.join(
     // Deletes ALL existing entries
@@ -8,25 +7,23 @@ exports.seed = function(knex, Promise) {
     knex('classes').insert({
       
       name: 'Wednesdays AM', 
-      teacherid: 1
+      userid: 4
 
 
     }),
     knex('classes').insert({
       
       name: 'Wednesdays PM', 
-      teacherid: 2
+      userid: 5
 
 
     }),
     knex('classes').insert({
       
       name: 'Wednesdays AM', 
-      teacherid: 3
+      userid: 6
 
 
     })
   );
 };
-
-

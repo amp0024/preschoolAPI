@@ -1,14 +1,24 @@
+
 exports.up = function(knex, Promise) {
+  
   return knex.schema.createTable('classes', function(table){
     
     table.increments('id').primary();
+    
     table.string('name');
-    table.integer('teacherid').unsigned();
-    table.foreign('teacherid')
+    
+    table.integer('userid').unsigned();
+    
+    table.foreign('userid')
       .references('id')
-      .inTable('teachers');
+      .inTable('users');
+  
   });
+
 };
+
 exports.down = function(knex, Promise) {
+
   return knex.schema.dropTable('classes');
+
 };
