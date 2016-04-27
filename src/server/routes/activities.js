@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var authHelpers = require('../lib/helpers');
 var queries = require('../db/activities_queries');
 
 // only availible to teachers

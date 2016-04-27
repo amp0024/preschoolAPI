@@ -6,30 +6,45 @@ var knex = require('../db/knex');
 var helpers = require('../lib/helpers');
 
 
-// router.post('/login', function(req, res, next) {
-//   passport.authenticate('local', function(err, user) {
-//     if (err) {
-//       req.flash('messages', {
-//         status: 'danger',
-//         value: 'Incorrect email and/or password.'
-//       });
-//       return res.redirect('/auth/login');
-//     } else {
-//       req.logIn(user, function(err) {
-//         if (err) {
-//           return next(err);
-//         } else {
-//           req.flash('messages', {
-//             status: 'success',
-//             value: 'Welcome!'
-//           });
-//           res.redirect(req.session.returnTo || '/');
-//           delete req.session.returnTo;
-//         }
-//       });
-//     }
-//   })(req, res, next);
-// });
+router.post('/login', function(req, res, next) {
+  var email = req.body.email;
+  var password = req.body.password;
+  var role = req.body.role;
+
+  User.findOne({email: req.body.email})
+  .then(function (user) {
+    if (!user) {
+      return res.status(401).json({
+        status: 'fail',
+        message: 'Email does not exist'
+      });
+    } else
+      user.comparePassword(req.body.password, function (err, match) {
+        if (err) {
+          return next(err);
+        }
+        if (!match) {
+          return res.status(401).json({
+            status: 'fail',
+            message: 'Password is not correct'
+          });
+        }
+      user = user.toObject();
+      // delete user.password;
+      var token = generateToken(user);
+      res.status(200).json({
+        status: 'success',
+        data: {
+          token: token,
+          user: user.email
+        }
+      });
+    });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+});
 
 router.post('/register', helepers.ensureAdmin, function(req, res, next) {
   var email = req.body.email;
