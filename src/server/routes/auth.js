@@ -6,8 +6,7 @@ var knex = require('../db/knex');
 var passport = require('../lib/auth');
 var helpers = require('../lib/helpers');
 
-// login School admins
-
+// login School admins -> teacher = false -> admin = true
 router.get('/loginAdmin', helpers.loginRedirect, function(req, res, next) {
   req.session.returnTo = req.header('referer');
   res.render('./auth/login', { messages: req.flash('messages') });

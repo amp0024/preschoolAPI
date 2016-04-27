@@ -3,6 +3,7 @@ var router = express.Router();
 
 var queries = require('../db/classes_queries');
 
+// only availible to teachers
 
 // GET all todos
 router.get('/', function(req, res, next) {
