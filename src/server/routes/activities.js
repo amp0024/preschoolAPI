@@ -3,6 +3,7 @@ var router = express.Router();
 
 var queries = require('../db/activities_queries');
 
+// only availible to teachers
 
 // GET all todos
 router.get('/', authHelpers.ensureAdmin, function(req, res, next) {
