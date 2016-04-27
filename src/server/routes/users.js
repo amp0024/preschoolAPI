@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
-
 var queries = require('../db/user_queries');
 
 // only availible to school admins
 
 // GET all todos
-router.get('/', helpers.ensureAuthenticated, function(req, res, next) {
+router.get('/', function(req, res, next) {
   queries.getAll()
   .then(function(todos) {
     console.log(todos)
