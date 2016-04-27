@@ -1,36 +1,38 @@
 var bcrypt = require('bcrypt');
+var moment = require('moment');
+var jwt = require('jwt-simple');
 
-function ensureAuthenticated(req, res, next) {
-  if(req.user) {
-    return next();
-  } else {
-    req.flash('messages', {
-      status: 'danger',
-      value: 'Please login.'
+function ensureAdmin(req, res, next) {
+  // check headers for the presence of an auth object
+  if(!(req.headers && req.headers.authorization)) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'No header present or no authorization header.'
     });
-    return res.redirect('/auth/login');
   }
-}
-// school admin true -> school admin  false -> teacher rights
-function ensureSchoolAdmin(req, res, next) {
-  if (req.user) {
-    if(req.user.schooladmin) {
-      return next();
-    }
+  // decode the token
+  var header = req.headers.authorization.split(' ');
+  var token = header[1];
+  var payload = jwt.decode(token, config.TOKEN_SECRET);
+  var now = moment().unix();
+  // ensure that it is valid
+  if(now > payload.exp || payload.iat > now || user.role != 'admin') {
+    return res.status(401).json({
+      status: 'fail',
+      message: 'Token is invalid'
+    });
   }
-  req.flash('messages', {
-    status: 'danger',
-    value: 'You do not have permission to view that page.'
-  });
-  return res.redirect('/');
-}
-
-function loginRedirect(req, res, next) {
-  if(req.user) {
-    return res.redirect('/');
-  } else {
-    return next();
-  }
+  // ensure user is still in the database
+  knex('users')
+    .where('id', payload.sub)
+    .first()
+    .then(function(user) {
+      // if in database, let them access the route
+      next();
+    })
+    .catch(function(err) {
+      return next(err);
+    });
 }
 
 function hashing(password) {
@@ -41,11 +43,19 @@ function comparePassword(password, hashedPassword) {
   return bcrypt.compareSync(password, hashedPassword);
 }
 
+function generateToken(user) {
+  var payload = {
+    exp: moment().add(14, 'days').unix(),
+    iat: moment().unix(),
+    sub: user._id
+  };
+  return jwt.encode(payload, process.env.TOKEN_SECRET);
+}
+
 
 module.exports = {
-  ensureAuthenticated: ensureAuthenticated,
   ensureAdmin: ensureAdmin,
-  loginRedirect: loginRedirect,
   hashing: hashing,
-  comparePassword: comparePassword
+  comparePassword: comparePassword,
+  generateToken: generateToken
 };
