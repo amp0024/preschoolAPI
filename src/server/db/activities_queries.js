@@ -16,6 +16,7 @@ function getSingle(id) {
 
 function add(activity) {
   return Activities().insert({
+      
       name: activity.name,
       startTime: activity.startTime,
       finishTime: activity.finishTime,

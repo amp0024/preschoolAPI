@@ -30,6 +30,13 @@ router.get('/:id', function(req, res, next) {
 
 // add todo
 router.post('/', function(req, res, next) {
+
+  if(req.body.id === '*'){
+    console.log(all);
+  } else {
+    console.log(single);
+  }
+
   queries.add(req.body)
   .then(function(todoID) {
     queries.getSingle(todoID)
