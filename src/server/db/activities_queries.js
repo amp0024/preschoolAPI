@@ -15,7 +15,16 @@ function getSingle(id) {
 }
 
 function add(activity) {
-  return Activities().insert(activity, 'id');
+  return Activities().insert({
+      name: activity.name,
+      startTime: activity.startTime,
+      finishTime: activity.finishTime,
+      description: activity.description,
+      type: activity.type,
+      studentid: activity.studentid
+
+
+  });
 }
 
 function update(id, updates) {
