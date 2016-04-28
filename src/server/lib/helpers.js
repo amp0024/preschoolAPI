@@ -38,7 +38,7 @@ function ensureAdmin(req, res, next) {
 }
 
 function hashing(password) {
-  return bcrypt.hashSync(password, process.env.SALT_WORK_FACTOR);
+  return bcrypt.hashSync(password, 10);
 }
 
 function comparePassword(password, hashedPassword) {

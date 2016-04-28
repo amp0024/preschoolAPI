@@ -8,7 +8,6 @@ var queries = require('../db/user_queries');
 router.get('/', function(req, res, next) {
   queries.getAll()
   .then(function(todos) {
-    console.log(todos)
     res.status(200).json(todos);
   })
   .catch(function(error) {
