@@ -22,7 +22,7 @@ function add(activity) {
       finishTime: activity.endTime,
       description: activity.description,
       type: activity.type,
-      studentid: activity.studentid
+      studentid: parseInt(activity.studentid)
 
 
   });
