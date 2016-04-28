@@ -30,8 +30,8 @@ router.get('/:id', function(req, res, next) {
 
 // add todo
 router.post('/', function(req, res, next) {
-console.log(req.body.id);
-  if(req.body.id === '*'){
+console.log(req.body.studentid);
+  if(req.body.studentid === '*'){
     console.log(all);
   } else {
     console.log(single);
