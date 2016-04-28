@@ -19,7 +19,7 @@ function add(activity) {
       
       name: activity.name,
       startTime: activity.startTime,
-      finishTime: activity.finishTime,
+      finishTime: activity.endTime,
       description: activity.description,
       type: activity.type,
       studentid: activity.studentid

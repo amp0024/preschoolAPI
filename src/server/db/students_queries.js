@@ -24,8 +24,6 @@ function add(student) {
   
     classid: student.classid,
   
-    
-  
     guardianid: student.id1
   
   
