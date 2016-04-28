@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var authHelpers = require('../lib/helpers');
 var queries = require('../db/activities_queries');
 
 // only availible to teachers
@@ -30,12 +29,12 @@ router.get('/:id', function(req, res, next) {
 
 // add todo
 router.post('/', function(req, res, next) {
-console.log(req.body.studentid);
-  if(req.body.studentid === '*'){
-    console.log(all);
-  } else {
-    console.log(single);
-  }
+// console.log(req.body.studentid);
+//   if(req.body.studentid === '*'){
+//     console.log(all);
+//   } else {
+//     console.log(single);
+//   }
 
   queries.add(req.body)
   .then(function(todoID) {
