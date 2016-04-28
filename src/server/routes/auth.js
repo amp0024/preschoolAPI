@@ -6,6 +6,11 @@ var knex = require('../db/knex');
 var helpers = require('../lib/helpers');
 
 
+/* 
+
+curl --data "email=test@test.com&password=test" http://localhost:3000/auth/login
+
+*/
 router.post('/login', function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
@@ -18,36 +23,35 @@ router.post('/login', function(req, res, next) {
         status: 'fail',
         message: 'Email does not exist'
       });
-    } else
-      helpers.comparePassword(req.body.password, function (err, match) {
-        if (err) {
-          return next(err);
-        }
-        if (!match) {
-          return res.status(401).json({
-            status: 'fail',
-            message: 'Password is not correct'
-          });
-        }
-      user = user.toObject();
-      // delete user.password;
-      var token = generateToken(user);
+    } else {
+      var match = helpers.comparePassword(req.body.password, user[0].password);
+      if (!match) {
+        return res.status(401).json({
+          status: 'fail',
+          message: 'Password is not correct'
+        });
+      }
+      delete user[0].password;
+      var token = helpers.generateToken(user);
       res.status(200).json({
         status: 'success',
         data: {
           token: token,
-          user: user.email
+          user: user[0]
         }
       });
-    });
+    }
   })
   .catch(function (err) {
-    console.log(err);
-      return next(err);
-
+    return next(err);
   });
 });
 //deleted helpers.ensureAdmin argument
+/* 
+
+curl --data "email=test@test.com&password=test&role=teacher" http://localhost:3000/auth/register
+
+*/
 router.post('/register', function(req, res, next) {
   console.log(req.body);
   var email = req.body.email;
