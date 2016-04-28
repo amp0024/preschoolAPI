@@ -15,8 +15,17 @@ function getSingle(id) {
 }
 
 function add(student) {
-  return Students().insert(student);
+  return Students().insert({
+    firstName: student.firstName,
+    lastName: student.lastName,
+    email: student.email,
+    image: student.image,
+    classid: student.classid,
+    guardianid: student.id1
+
+  });
 }
+ 
 
 function update(id, updates) {
   return Students().where('id', id).update(updates);
