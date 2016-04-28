@@ -10,7 +10,6 @@ var queries = require('../db/students_queries');
 router.get('/', function(req, res, next) {
   queries.getAll()
   .then(function(todos) {
-    console.log(todos)
     res.status(200).json(todos);
   })
   .catch(function(error) {

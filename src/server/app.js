@@ -50,7 +50,6 @@ app.use('/users', userRoutes);
 app.use('/students', students);
 app.use('/activities', activities);
 app.use('/auth', auth);
-// app.use('/auth', authRoutes);
 
 
 // catch 404 and forward to error handler

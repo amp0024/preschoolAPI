@@ -45,9 +45,9 @@ router.post('/login', function(req, res, next) {
     return next(err);
   });
 });
-
-router.post('/register', helpers.ensureAdmin, function(req, res, next) {
-  
+//deleted helpers.ensureAdmin argument
+router.post('/register', function(req, res, next) {
+  console.log(req.body);
   var email = req.body.email;
   var password = req.body.password;
   var role = req.body.role;
@@ -67,7 +67,7 @@ router.post('/register', helpers.ensureAdmin, function(req, res, next) {
       } else {
         var hashedPassword = helpers.hashing(password);
         knex('users')
-        .returning('*')
+        .returning('*') //might have to remove this
         .insert({
           email: email,
           password: hashedPassword,
@@ -78,8 +78,8 @@ router.post('/register', helpers.ensureAdmin, function(req, res, next) {
           schoolid: schoolid,
           image: image
         })
-        .then(function(data) {
-          var token = generateToken(user);
+        .then(function(user) {
+          var token = helpers.generateToken(user);
           delete user.password;
           res.status(200).json({
             status: 'success',
