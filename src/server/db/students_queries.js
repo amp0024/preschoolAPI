@@ -15,7 +15,7 @@ function getSingle(id) {
 }
 
 function add(student) {
-  return Students().insert(student, 'id');
+  return Students().insert(student);
 }
 
 function update(id, updates) {
