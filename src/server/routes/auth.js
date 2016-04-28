@@ -42,7 +42,9 @@ router.post('/login', function(req, res, next) {
     });
   })
   .catch(function (err) {
-    return next(err);
+    console.log(err);
+      return next(err);
+
   });
 });
 //deleted helpers.ensureAdmin argument
