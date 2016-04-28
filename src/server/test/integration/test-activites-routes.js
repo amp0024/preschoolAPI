@@ -28,17 +28,21 @@ describe('activities routes', function() {
           res.body.should.be.a('object');
           res.body.should.have.property('data');
           res.body.data.should.be.a('Array');
-          res.body.data[0].should.have.property('_id');
-          res.body.data[0].should.have.property('messages');
-          res.body.data[0].should.have.property('_members');
+          res.body.data[0].should.have.property('id');
+          res.body.data[0].should.have.property('name');
+          res.body.data[0].should.have.property('startTime');
+          res.body.data[0].should.have.property('finishTime');
+          res.body.data[0].should.have.property('description');
+          res.body.data[0].should.have.property('type');
+
           done();
         });
       });
     });
   });
 
-  describe('POST /gdating/members/:id/conversations', function() {
-    it('should return a members\' conversations', function(done) {
+  describe('POST /activities', function() {
+    it('should return a user\'s activities', function(done) {
       Member.findOne()
       .then(function(member) {
         var memberID = member._id;
@@ -54,9 +58,12 @@ describe('activities routes', function() {
           res.body.should.be.a('object');
           res.body.should.have.property('data');
           res.body.data.should.be.a('Array');
-          res.body.data[0].should.have.property('_id');
-          res.body.data[0].should.have.property('messages');
-          res.body.data[0].should.have.property('_members');
+          res.body.data[0].should.have.property('id');
+          res.body.data[0].should.have.property('name');
+          res.body.data[0].should.have.property('startTime');
+          res.body.data[0].should.have.property('finishTime');
+          res.body.data[0].should.have.property('description');
+          res.body.data[0].should.have.property('type');
           done();
         });
       });
