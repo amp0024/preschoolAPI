@@ -2,7 +2,7 @@ var bcrypt = require('bcryptjs');
 var moment = require('moment');
 var jwt = require('jwt-simple');
 
-var config = require('../../_config');
+// var config = require('../../_config');
 
 function ensureAdmin(req, res, next) {
   // check headers for the presence of an auth object
@@ -38,7 +38,7 @@ function ensureAdmin(req, res, next) {
 }
 
 function hashing(password) {
-  return bcrypt.hashSync(password, config.SALT_WORK_FACTOR);
+  return bcrypt.hashSync(password, process.env.SALT_WORK_FACTOR);
 }
 
 function comparePassword(password, hashedPassword) {
@@ -51,7 +51,7 @@ function generateToken(user) {
     iat: moment().unix(),
     sub: user._id
   };
-  return jwt.encode(payload, config.TOKEN_SECRET);
+  return jwt.encode(payload, process.env.TOKEN_SECRET);
 }
 
 
