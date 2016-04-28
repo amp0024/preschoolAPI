@@ -4,9 +4,9 @@ var authHelpers = require('../lib/helpers');
 var queries = require('../db/activities_queries');
 
 // only availible to teachers
-
+//removed ensureAdmin helper
 // GET all todos
-router.get('/', authHelpers.ensureAdmin, function(req, res, next) {
+router.get('/', function(req, res, next) {
   queries.getAll()
   .then(function(todos) {
     console.log(todos)
