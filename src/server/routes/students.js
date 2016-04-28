@@ -31,8 +31,8 @@ router.get('/:id', function(req, res, next) {
 // add todo
 router.post('/', function(req, res, next) {
   queries.add(req.body)
-  .then(function(todoID) {
-    queries.getSingle(todoID)
+  // .then(function(todoID) {
+  //   queries.getSingle(todoID)
     .then(function(todo) {
       res.status(200).json(todo);
     })
