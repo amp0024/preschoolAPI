@@ -21,7 +21,7 @@ function add(student) {
     email: student.email,
     image: student.image,
     classid: student.classid,
-    guardianid: student.id1
+    guardianid: student.guardianid
 
   });
 }
