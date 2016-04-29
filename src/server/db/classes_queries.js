@@ -15,7 +15,16 @@ function getSingle(id) {
 }
 
 function add(classes) {
-  return Classes().insert(classes, 'id');
+  return Classes().insert({
+    name: classes.name,
+    userid: classes.teacher
+  }).then(function(info) {
+    console.log(info);
+    return info;
+  })
+  .catch(err => {
+    console.log('Error:', err);
+  });
 }
 
 function update(id, updates) {

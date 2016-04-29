@@ -8,7 +8,6 @@ var queries = require('../db/activities_queries');
 router.get('/', function(req, res, next) {
   queries.getAll()
   .then(function(todos) {
-    console.log(todos)
     res.status(200).json(todos);
   })
   .catch(function(error) {
@@ -29,14 +28,16 @@ router.get('/:id', function(req, res, next) {
 
 // add todo
 router.post('/', function(req, res, next) {
-  console.log(req.body);
 // console.log(req.body.studentid);
 //   if(req.body.studentid === '*'){
 //     console.log(all);
 //   } else {
 //     console.log(single);
 //   }
+  req.body.startTime = req.body.startTime.toString();
+  req.body.endTime = req.body.endTime.toString();
 
+  console.log(req.body);
   queries.add(req.body)
   .then(function(todoID) {
     queries.getSingle(todoID)

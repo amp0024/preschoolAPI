@@ -25,7 +25,14 @@ function add(activity) {
       studentid: parseInt(activity.studentid)
 
 
-  });
+  })
+  .then(function(info) {
+    console.log(info);
+    return info;
+  })
+  .catch(err => {
+    console.log('Error:', err);
+  })
 }
 
 function update(id, updates) {

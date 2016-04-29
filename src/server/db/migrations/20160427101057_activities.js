@@ -6,11 +6,11 @@ exports.up = function(knex, Promise) {
   
     table.string('name');
     
-    table.time('startTime');
+    table.string('startTime');
   
-    table.time('finishTime');
+    table.string('finishTime');
   
-    table.text('description');
+    table.string('description');
   
     table.string('type');
   
